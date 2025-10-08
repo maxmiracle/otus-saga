@@ -13,8 +13,8 @@ import ru.otus.billing.api.dto.MakePaymentResponse;
 @RequestMapping(path = "/billing")
 public interface BillingApi {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/reserve", consumes = {"application/json"})
-    default MakePaymentResponse makePayment(@Parameter(name = "ReserveRequest", description = "", required = true) @Valid @RequestBody MakePaymentRequest makePaymentRequest) {
+    @RequestMapping(method = RequestMethod.POST, value = "/makePayment", consumes = {"application/json"})
+    default MakePaymentResponse makePayment(@Parameter(name = "makePaymentRequest", description = "makePayment", required = true) @Valid @RequestBody MakePaymentRequest makePaymentRequest) {
         return null;
     }
 

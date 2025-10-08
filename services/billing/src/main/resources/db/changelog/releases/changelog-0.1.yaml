@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id:  1
+      author:  maxim.vasilyev
+      labels: create-table
+      comment: create table account
+      changes:
+        - createTable:
+            tableName:  account
+            schemaName:  public
+            columns:
+              - column:
+                  name:  id
+                  type:  uuid
+                  defaultValueComputed: "gen_random_uuid()"
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+              - column:
+                  name:  username
+                  type:  varchar
+              - column:
+                  name:  amount
+                  type:  numeric(10, 2)

@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id:  2
+      author:  maxim.vasilyev
+      labels: insert-test
+      comment: create account
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  value: "2d2ede68-68fd-456c-9861-c45f46f3be1d"
+              - column:
+                  name: username
+                  value: "user1"
+              - column:
+                  name: amount
+                  value: "1000.00"

@@ -13,8 +13,8 @@ import ru.otus.delivery.api.dto.ScheduleResponse;
 @RequestMapping(path = "/delivery")
 public interface DeliveryApi {
 
-    @RequestMapping(method = RequestMethod.POST, value = "/reserve", consumes = {"application/json"})
-    default ScheduleResponse schedule(@Parameter(name = "ReserveRequest", description = "", required = true) @Valid @RequestBody ScheduleRequest scheduleRequest) {
+    @RequestMapping(method = RequestMethod.POST, value = "/schedule", consumes = {"application/json"})
+    default ScheduleResponse schedule(@Parameter(name = "scheduleRequest", description = "scheduleRequest", required = true) @Valid @RequestBody ScheduleRequest scheduleRequest) {
         return null;
     }
 
