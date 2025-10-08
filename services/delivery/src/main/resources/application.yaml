@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: delivery
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+make-payment-url: http://${ORDER_SYS_BILLING_SERVICE_CHART_SERVICE_HOST:localhost}:8080/billing-service/makePayment
