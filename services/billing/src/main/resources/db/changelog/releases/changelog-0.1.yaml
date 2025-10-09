@@ -20,5 +20,5 @@ databaseChangeLog:
                   name:  username
                   type:  varchar
               - column:
-                  name:  amount
+                  name:  balance
                   type:  numeric(10, 2)

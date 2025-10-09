@@ -3,9 +3,13 @@ package ru.otus.billing.api;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.otus.billing.api.dto.MakePaymentRequest;
 import ru.otus.billing.api.dto.MakePaymentResponse;
+import ru.otus.billing.exception.MakePaymentException;
 import ru.otus.billing.service.BillingService;
 
 @RestController
@@ -18,5 +22,11 @@ public class BillingController implements BillingApi {
     @Override
     public MakePaymentResponse makePayment(@Valid MakePaymentRequest makePaymentRequest) {
         return billingService.makePayment(makePaymentRequest);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler( MakePaymentException.class )
+    public MakePaymentResponse handleException(MakePaymentException ex) {
+        return new MakePaymentResponse(ex.getOrderId(), false, ex.getMessage());
     }
 }

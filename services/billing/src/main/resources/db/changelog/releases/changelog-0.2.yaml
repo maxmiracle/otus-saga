@@ -15,5 +15,5 @@ databaseChangeLog:
                   name: username
                   value: "user1"
               - column:
-                  name: amount
+                  name: balance
                   value: "1000.00"
