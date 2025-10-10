@@ -1,4 +1,4 @@
-package ru.otus.delivery;
+package ru.otus.warehouse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

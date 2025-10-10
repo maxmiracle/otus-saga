@@ -1,4 +1,4 @@
-package ru.otus.delivery.api.dto;
+package ru.otus.warehouse.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

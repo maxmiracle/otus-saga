@@ -7,7 +7,7 @@ import ru.otus.delivery.api.dto.ScheduleResponse;
 
 @Service
 @Slf4j
-public class DeliveryServiceImpl implements ru.otus.delivery.service.DeliveryService {
+public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public ScheduleResponse schedule(ScheduleRequest scheduleRequest) {

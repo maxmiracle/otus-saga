@@ -85,9 +85,9 @@
             <!--                    <configuration>-->
             <!--                        <generatorName>spring</generatorName>-->
             <!--                        <library>spring-boot</library>-->
-            <!--                        <apiPackage>ru.otus.delivery.generated.api</apiPackage>-->
-            <!--                        <modelPackage>ru.otus.delivery.generated.model</modelPackage>-->
-            <!--                        <invokerPackage>ru.otus.delivery.generated</invokerPackage>-->
+            <!--                        <apiPackage>ru.otus.warehouse.generated.api</apiPackage>-->
+            <!--                        <modelPackage>ru.otus.warehouse.generated.model</modelPackage>-->
+            <!--                        <invokerPackage>ru.otus.warehouse.generated</invokerPackage>-->
             <!--                        <inputSpec>${project.basedir}/src/main/resources/delivery-service-rest-api.yaml</inputSpec>-->
             <!--                        <configOptions>-->
             <!--                            <useSpringBoot3>true</useSpringBoot3>-->

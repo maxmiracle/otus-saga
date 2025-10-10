@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id:  2
+      author:  maxim.vasilyev
+      labels: create-table-reservation
+      comment: create table reservation
+      changes:
+        - createTable:
+            tableName:  reservation
+            schemaName:  public
+            columns:
+              - column:
+                  name:  id
+                  type:  uuid
+                  defaultValueComputed: "gen_random_uuid()"
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+              - column:
+                  name:  product_id
+                  type:  uuid
+                  constraints:
+                    nullable:  false
+                    references: product(id)
+                    foreignKeyName: reservation_product_id_fk
+              - column:
+                  name:  order_id
+                  type:  uuid
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  quantity
+                  type:  integer
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  created_at
+                  type:  timestamp
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  is_active
+                  type:  boolean
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  note
+                  type:  text

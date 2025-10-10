@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id:  2
+      author:  maxim.vasilyev
+      labels: insert-test
+      comment: create product
+      changes:
+        - insert:
+            tableName: product
+            columns:
+              - column:
+                  name: id
+                  value: "11112222-aaaa-bbbb-cccc-dddd00001111"
+              - column:
+                  name: quantity
+                  value: "3"
+              - column:
+                  name: reserved_quantity
+                  value: "0"
+              - column:
+                  name: version
+                  value: "1"
