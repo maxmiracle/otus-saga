@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${ORDER_PORT:8080}
 spring:
   application:
     name: order
@@ -12,4 +12,8 @@ management:
     web:
       exposure:
         include: "*"
-make-payment-url: http://${ORDER_SYS_BILLING_SERVICE_CHART_SERVICE_HOST:localhost}:8080/billing-service/makePayment
+reserve-url: http://${WAREHOUSE_HOST:localhost}:${WAREHOUSE_PORT:8081}/warehouse/reserve
+rollback-reserve-url: http://${WAREHOUSE_HOST:localhost}:${WAREHOUSE_PORT:8081}/warehouse/rollbackReserve
+schedule-url: http://${DELIVERY_HOST:localhost}:${DELIVERY_PORT:8082}/delivery/schedule
+cancel-shipment-url: http://${DELIVERY_HOST:localhost}:${DELIVERY_PORT:8082}/delivery/cancelShipment
+make-payment-url: http://${BILLING_HOST:localhost}:${BILLING_PORT:8083}/billing/makePayment

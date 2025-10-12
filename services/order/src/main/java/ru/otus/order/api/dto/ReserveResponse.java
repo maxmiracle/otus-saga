@@ -1,7 +1,6 @@
-package ru.otus.delivery.api.dto;
+package ru.otus.order.api.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +10,10 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ScheduleResponse {
+public class ReserveResponse {
     private UUID orderId;
-    private UUID deliveryId;
-    private boolean scheduled;
+    private Instant reservedAt;
+    private UUID reservationId;
+    private boolean reserved;
     private String error;
 }

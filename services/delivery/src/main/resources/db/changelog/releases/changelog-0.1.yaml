@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id:  1
+      author:  maxim.vasilyev
+      labels: create-table-delivery
+      comment: create table delivery
+      changes:
+        - createTable:
+            tableName:  delivery
+            schemaName:  public
+            columns:
+              - column:
+                  name:  id
+                  type:  uuid
+                  defaultValueComputed: "gen_random_uuid()"
+                  constraints:
+                    primaryKey:  true
+                    nullable:  false
+              - column:
+                  name:  version
+                  type:  integer
+              - column:
+                  name:  order_id
+                  type:  uuid
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  product_id
+                  type:  uuid
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  quantity
+                  type:  integer
+              - column:
+                  name:  account_id
+                  type:  uuid
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  delivery_date
+                  type:  date
+                  constraints:
+                    nullable:  false
+              - column:
+                  name:  delivery_slot
+                  type:  varchar(255)
+                  constraints:
+                    nullable:  false
+

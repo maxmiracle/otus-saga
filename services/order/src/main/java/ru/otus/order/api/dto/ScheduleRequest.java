@@ -1,10 +1,9 @@
-package ru.otus.delivery.api.dto;
+package ru.otus.order.api.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.delivery.entity.DeliverySlot;
 
 import java.time.LocalDate;
 import java.util.UUID;

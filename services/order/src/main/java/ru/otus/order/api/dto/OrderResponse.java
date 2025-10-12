@@ -1,6 +1,7 @@
 package ru.otus.order.api.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +12,15 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderResponse {
-    private UUID accountId;
-    private UUID productId;
-    private Integer quantity;
-    private LocalDate date;
-    private DeliverySlot deliverySlot;
-    private Double amount;
+    private UUID orderId;
+    private Boolean isSuccess;
+    private String errorMessage;
+
+    public static OrderResponse error(UUID orderId, String errorMessage){
+        return new OrderResponse(orderId, false, errorMessage);
+    }
+
+    public static OrderResponse success(UUID orderId) {
+        return new OrderResponse(orderId, true, null);
+    }
 }
