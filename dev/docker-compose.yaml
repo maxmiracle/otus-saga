@@ -49,7 +49,7 @@ services:
                -c wal_buffers=16MB
                -c default_statistics_target=100
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres_user -d postgres_db" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -86,7 +86,7 @@ services:
                -c wal_buffers=16MB
                -c default_statistics_target=100
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres_user -d postgres_db" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -123,7 +123,7 @@ services:
                -c wal_buffers=16MB
                -c default_statistics_target=100
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres_user -d postgres_db" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d postgres" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -135,6 +135,7 @@ services:
     image: maxmiracle/billing:1
     container_name: billing-service
     environment:
+      - BILLING_PORT=8080
       - USER_DB_HOST=postgres-billing
       - USER_DB_PORT=5432
       - USER_DB_NAME=postgres
@@ -143,8 +144,86 @@ services:
       - USER_DB_SCHEMA=public
     ports:
       - "8081:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
     depends_on:
       postgres-billing:
+        condition: service_healthy
+
+  warehouse-service:
+    image: maxmiracle/warehouse:1
+    container_name: warehouse-service
+    environment:
+      - WAREHOUSE_PORT=8080
+      - USER_DB_HOST=postgres-warehouse
+      - USER_DB_PORT=5432
+      - USER_DB_NAME=postgres
+      - USER_DB_USER=postgres
+      - USER_DB_PASSWORD=postgres
+      - USER_DB_SCHEMA=public
+    ports:
+      - "8082:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      postgres-warehouse:
+        condition: service_healthy
+        
+  delivery-service:
+    image: maxmiracle/delivery:1
+    container_name: delivery-service
+    environment:
+      - DELIVERY_PORT=8080
+      - USER_DB_HOST=postgres-delivery
+      - USER_DB_PORT=5432
+      - USER_DB_NAME=postgres
+      - USER_DB_USER=postgres
+      - USER_DB_PASSWORD=postgres
+      - USER_DB_SCHEMA=public
+    ports:
+      - "8083:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      postgres-delivery:
+        condition: service_healthy
+
+  order-service:
+    image: maxmiracle/order:1
+    container_name: order-service
+    environment:
+      - WAREHOUSE_HOST=warehouse-service
+      - DELIVERY_HOST=delivery-service
+      - BILLING_HOST=billing-service
+      - WAREHOUSE_PORT=8080
+      - DELIVERY_PORT=8080
+      - BILLING_PORT=8080
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    depends_on:
+      billing-service:
+        condition: service_healthy
+      warehouse-service:
+        condition: service_healthy
+      delivery-service:
         condition: service_healthy
 
 volumes:
